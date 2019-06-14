@@ -1,5 +1,5 @@
 #configure variables
-set (SAMPLE_NAME "app")
+set (SAMPLE_NAME "app_mtcnn")
 
 #configure directories
 set (SAMPLE_PATH "${PROJECT_SOURCE_DIR}/sample")
@@ -24,6 +24,8 @@ file (GLOB SAMPLE_HEADER_FILES "${SAMPLE_INCLUDE_PATH}/*.h")
 
 #set target executable
 add_executable (${SAMPLE_NAME} ${SAMPLE_SOURCE_FILES} ${SAMPLE_HEADER_FILES})
+
+install(TARGETS ${SAMPLE_NAME}  DESTINATION /usr/bin COMPONENT binaries)
 
 if (WIN32)
 set(LINK_OPTIONS shlwapi.lib)
