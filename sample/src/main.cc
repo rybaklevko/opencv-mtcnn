@@ -59,14 +59,23 @@ int main(int argc, char **argv) {
 
   std::vector<Face> faces;
 
-  for (int i(0); i < 100; ++i)
+  static constexpr int cycleNumber = 10;
+  static constexpr double secondsCaster = 1000000000.0L;
+  long double summary = 0;
+
+  for (int i(0); i < cycleNumber; ++i)
   {
-    {
-    boost::timer::auto_cpu_timer t(3, "%w seconds\n");
+
+    boost::timer::cpu_timer t;//(3, "%w seconds\n");
     faces = detector.detect(img, 10.f, 0.709f);
-    }
-    std::cout << "Number of faces found in the supplied image - " << faces.size()<< std::endl;
+
+    boost::timer::cpu_times times = t.elapsed();
+    std::cout << "Time used for face recognition : " << static_cast<double>(times.wall) /secondsCaster << std::endl;
+    summary +=  static_cast<double>(times.wall) /secondsCaster;
   }
+
+  std::cout << "Average face recognition time: " << double(summary/cycleNumber) <<  std::endl;
+  std::cout << "Number of faces found in the supplied image - " << faces.size()<< std::endl;
 
 
   std::vector<rectPoints> data;
