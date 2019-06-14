@@ -59,9 +59,12 @@ int main(int argc, char **argv) {
 
   std::vector<Face> faces;
 
+  for (int i(0); i < 100; ++i)
   {
+    {
     boost::timer::auto_cpu_timer t(3, "%w seconds\n");
-    faces = detector.detect(img, 20.f, 0.709f);
+    faces = detector.detect(img, 10.f, 0.709f);
+    }
   }
 
   std::cout << "Number of faces found in the supplied image - " << faces.size()
@@ -83,8 +86,12 @@ int main(int argc, char **argv) {
   }
 
   auto resultImg = drawRectsAndPoints(img, data);
-  cv::imshow("test-oc", resultImg);
-  cv::waitKey(0);
+
+  std::string fpath = "output.jpg";
+  cv::imwrite( fpath, resultImg );
+
+  // cv::imshow("test-oc", resultImg);
+  // cv::waitKey(0);
 
   return 0;
 }
