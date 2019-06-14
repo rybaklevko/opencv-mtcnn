@@ -65,10 +65,9 @@ int main(int argc, char **argv) {
     boost::timer::auto_cpu_timer t(3, "%w seconds\n");
     faces = detector.detect(img, 10.f, 0.709f);
     }
+    std::cout << "Number of faces found in the supplied image - " << faces.size()<< std::endl;
   }
 
-  std::cout << "Number of faces found in the supplied image - " << faces.size()
-            << std::endl;
 
   std::vector<rectPoints> data;
 
